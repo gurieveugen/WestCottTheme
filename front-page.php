@@ -93,22 +93,38 @@
 		<div class="tools-area">
 			<h3>Other Products</h3>
 			<?php
-			$other_cats = get_categories('parent=0&exclude='.$hayman_reese_cid.'&hide_empty=0&number=3');
-			if (count($other_cats) > 0) {
-			?>
-			<ul class="promo-list">
-				<?php foreach ($other_cats as $other_cat) { $cat_image = $catimagepath.$other_cat->cat_ID.'.original.jpg'; ?>
-				<li>
-					<div class="box">
-						<a rel="example_group3" title="<?php echo $other_cat->cat_name; ?>" class="fancy" href="<?php echo get_category_link($other_cat->cat_ID); ?>">
-							<img src="<?php echo get_thumb($cat_image, 173); ?>" alt="#" />
-							<span class="txt"><?php echo $other_cat->cat_name; ?></span>
-						</a>
-					</div>
-				</li>
-				<?php } ?>
-			</ul>
-			<?php } // if (count($other_cats) > 0) { ?>
+			$other_cats = get_categories('parent=0&exclude='.$hayman_reese_cid.'&hide_empty=0&number=4');
+			if (count($other_cats) > 0) 
+			{
+				for($i = 0; $i < count($other_cats); $i+=3)
+				{
+					?>
+					<ul class="promo-list">
+					<?php
+					for($x = 0; $x < 3; $x++)
+					{
+						if(isset($other_cats[$i+$x]))
+						{
+							$other_cat = $other_cats[$i+$x];	
+							$cat_image = $catimagepath.$other_cat->cat_ID.'.original.jpg';
+							?>
+							<li>
+								<div class="box">
+									<a rel="example_group3" title="<?php echo $other_cat->cat_name; ?>" class="fancy" href="<?php echo get_category_link($other_cat->cat_ID); ?>">
+										<img src="<?php echo get_thumb($cat_image, 173); ?>" alt="#" />
+										<span class="txt"><?php echo $other_cat->cat_name; ?></span>
+									</a>
+								</div>
+							</li>
+							<?php
+						}
+						
+					}
+					?>
+					</ul>
+					<?php
+				}
+			} // if (count($other_cats) > 0) { ?>
 		</div>
 		<?php get_template_part('footer-content') ?>
 	</div>
